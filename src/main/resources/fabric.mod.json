@@ -1,0 +1,24 @@
+{
+  "schemaVersion": 1,
+  "id": "yubyeol_canvas_grid",
+  "version": "${version}",
+  "name": "YUBYEOL's Canvas Grid Mod",
+  "description": "Client-side overlay for ArtMap easels: a 32x32 grid with tick labels, a highlight on the pixel your view will paint, and the pixel coordinates on the HUD. No automation, no network access.",
+  "authors": ["YUBYEOL"],
+  "license": "MIT",
+  "icon": "assets/yubyeol_canvas_grid/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["kr.yubyeol.canvasgrid.CanvasGridMod"],
+    "modmenu": ["kr.yubyeol.canvasgrid.ModMenuIntegration"]
+  },
+  "suggests": {
+    "modmenu": "*"
+  },
+  "depends": {
+    "fabricloader": ">=0.16.0",
+    "fabric-api": "*",
+    "minecraft": "~1.21.4",
+    "java": ">=21"
+  }
+}
