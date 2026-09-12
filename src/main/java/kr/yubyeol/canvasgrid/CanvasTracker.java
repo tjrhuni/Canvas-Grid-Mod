@@ -5,6 +5,7 @@ import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.MapIdComponent;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.decoration.ArmorStandEntity;
 import net.minecraft.entity.decoration.ItemFrameEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.map.MapState;
@@ -16,6 +17,8 @@ public final class CanvasTracker {
 
   /** 지도를 든 액자와 그 방향, 그리고 클라이언트가 가진 지도 데이터. */
   public record Canvas(ItemFrameEntity frame, Direction facing, MapState mapState) {}
+
+  private static final double SEAT_RANGE_SQUARED = 3.0 * 3.0;
 
   private final GridConfig config;
 
@@ -44,7 +47,11 @@ public final class CanvasTracker {
       return;
     }
     canvas = findCanvas(client, player);
-    cursor = canvas != null && config.showCursor && player.hasVehicle()
+    boolean seated = canvas != null && isSeatedAt(player, canvas);
+    if (config.seatedOnly && !seated) {
+      canvas = null;
+    }
+    cursor = canvas != null && config.showCursor && seated
         ? ArtMapCursor.pixelAt(player.getYaw(), player.getPitch(),
             ArtMapCursor.yawOffset(canvas.facing()))
         : null;
@@ -75,6 +82,13 @@ public final class CanvasTracker {
       }
     }
     return best;
+  }
+
+  /** 이젤 좌석(갑옷 거치대)에 타고 있고 그 자리가 도화지 바로 앞인지. */
+  private static boolean isSeatedAt(ClientPlayerEntity player, Canvas canvas) {
+    Entity vehicle = player.getVehicle();
+    return vehicle instanceof ArmorStandEntity
+        && vehicle.getPos().squaredDistanceTo(canvas.frame().getPos()) < SEAT_RANGE_SQUARED;
   }
 
   private static boolean holdsMap(ItemFrameEntity frame) {

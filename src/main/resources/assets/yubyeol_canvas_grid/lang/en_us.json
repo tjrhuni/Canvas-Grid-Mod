@@ -7,6 +7,10 @@
 
   "option.yubyeol_canvas_grid.enabled": "Overlay",
   "option.yubyeol_canvas_grid.enabled.tooltip": "Turns the grid, pointer and coordinates on or off together.\nSame as the toggle key (G by default).\nTurn it off to look at a finished painting without the overlay.",
+  "option.yubyeol_canvas_grid.seated_only": "Only while seated",
+  "option.yubyeol_canvas_grid.seated_only.tooltip": "When on, the grid and coordinates show only while you sit on the easel; standing up shows the plain painting.
+Keeps finished paintings uncovered when you are not working.
+When off, every nearby easel canvas gets the grid.",
   "option.yubyeol_canvas_grid.crisp_canvas": "Sharp pixels",
   "option.yubyeol_canvas_grid.crisp_canvas.tooltip": "Up close, the map texture is filtered and painted pixels bleed past their cells.\nWhen on, the canvas is repainted from the map data the client already has,\nso each pixel is a sharp square that sits exactly in its grid cell. Colours are unchanged.",
   "option.yubyeol_canvas_grid.line_width": "Line width: %s",

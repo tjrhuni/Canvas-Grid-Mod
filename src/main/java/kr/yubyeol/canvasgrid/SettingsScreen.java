@@ -17,7 +17,7 @@ public final class SettingsScreen extends Screen {
   private static final int BUTTON_WIDTH = 150;
   private static final int BUTTON_HEIGHT = 20;
   private static final int COLUMN_GAP = 10;
-  private static final int ROW_HEIGHT = 24;
+  private static final int ROW_HEIGHT = 22;
   private static final int TOP = 36;
 
   private final Screen parent;
@@ -40,7 +40,10 @@ public final class SettingsScreen extends Screen {
     int row = 0;
 
     addToggle(left, row, "enabled", config.enabled, v -> config.enabled = v);
-    addToggle(right, row++, "crisp_canvas", config.crispCanvas, v -> config.crispCanvas = v);
+    addToggle(right, row++, "seated_only", config.seatedOnly, v -> config.seatedOnly = v);
+
+    addToggle(left, row, "crisp_canvas", config.crispCanvas, v -> config.crispCanvas = v);
+    addToggle(right, row++, "show_labels", config.showLabels, v -> config.showLabels = v);
 
     addSlider(left, row, new LineWidthSlider());
     addSlider(right, row++, new OpacitySlider());
@@ -58,15 +61,15 @@ public final class SettingsScreen extends Screen {
     }).dimensions(right, rowY(row++), BUTTON_WIDTH, BUTTON_HEIGHT)
         .tooltip(tooltip("bold_every")).build());
 
-    addToggle(left, row, "show_labels", config.showLabels, v -> config.showLabels = v);
-    addToggle(right, row++, "show_cursor", config.showCursor, v -> config.showCursor = v);
+    addToggle(left, row, "show_cursor", config.showCursor, v -> config.showCursor = v);
+    addToggle(right, row++, "show_hud", config.showHud, v -> config.showHud = v);
 
-    addToggle(left, row, "show_hud", config.showHud, v -> config.showHud = v);
-    addCycle(right, row++, "hud_corner", GridConfig.HudCorner.values(), config.hudCorner,
+    addCycle(left, row, "hud_corner", GridConfig.HudCorner.values(), config.hudCorner,
         GridConfig.HudCorner::label, v -> config.hudCorner = v);
 
-    addSlider(left, row, new PointerWidthSlider());
-    addSlider(right, row++, new RadiusSlider());
+    addSlider(right, row++, new PointerWidthSlider());
+
+    addSlider(left, row++, new RadiusSlider());
 
     row++;
     addDrawableChild(ButtonWidget.builder(option("reset"), button -> {

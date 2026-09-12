@@ -57,6 +57,8 @@ public final class GridConfig {
 
   public boolean enabled = true;
   public boolean crispCanvas = true;
+  /** 이젤에 앉아 있을 때만 오버레이를 그린다. */
+  public boolean seatedOnly = true;
   public boolean showLabels = true;
   public boolean showCursor = true;
   public boolean showHud = true;
@@ -92,6 +94,7 @@ public final class GridConfig {
     }
     config.enabled = bool(p, "enabled", config.enabled);
     config.crispCanvas = bool(p, "crispCanvas", config.crispCanvas);
+    config.seatedOnly = bool(p, "seatedOnly", config.seatedOnly);
     config.showLabels = bool(p, "showLabels", config.showLabels);
     config.showCursor = bool(p, "showCursor", config.showCursor);
     config.showHud = bool(p, "showHud", config.showHud);
@@ -114,6 +117,7 @@ public final class GridConfig {
     Properties p = new Properties();
     p.setProperty("enabled", String.valueOf(enabled));
     p.setProperty("crispCanvas", String.valueOf(crispCanvas));
+    p.setProperty("seatedOnly", String.valueOf(seatedOnly));
     p.setProperty("showLabels", String.valueOf(showLabels));
     p.setProperty("showCursor", String.valueOf(showCursor));
     p.setProperty("showHud", String.valueOf(showHud));
@@ -142,6 +146,7 @@ public final class GridConfig {
     GridConfig defaults = new GridConfig();
     enabled = defaults.enabled;
     crispCanvas = defaults.crispCanvas;
+    seatedOnly = defaults.seatedOnly;
     showLabels = defaults.showLabels;
     showCursor = defaults.showCursor;
     showHud = defaults.showHud;
