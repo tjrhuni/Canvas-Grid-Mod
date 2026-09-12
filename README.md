@@ -1,85 +1,84 @@
 # YUBYEOL's Canvas Grid Mod
 
-A small client-side Fabric mod for painting on [ArtMap](https://github.com/Fupery/ArtMap) easels.
-It draws a 32x32 grid over the canvas, labels every fourth line, and highlights the pixel that
-your current view will paint.
+[ArtMap](https://github.com/Fupery/ArtMap) 이젤에서 그림을 그릴 때 쓰는 작은 클라이언트 Fabric
+모드입니다. 도화지 위에 32×32 모눈을 그리고, 4칸마다 눈금 숫자를 붙이고, 지금 시선으로 클릭하면
+칠해질 픽셀을 테두리로 보여 줍니다.
 
-## What it does
+## 하는 일
 
-- Draws a 32x32 grid on the map that sits on the easel, with bold lines and tick labels
-  (4, 8, 12, ... 28) along the top and left edges.
-- While you are seated on the easel, outlines the pixel that ArtMap will paint for your current
-  yaw and pitch. ArtMap chooses the pixel from the view angles, not from where the crosshair
-  appears to hit, so the outline can differ from the crosshair; the outline is the one that
-  matches the server.
-- Shows the pixel coordinates in a corner of the screen.
-- Repaints the canvas as sharp one-pixel squares from the client-side map data, so each painted
-  pixel sits exactly inside its grid cell instead of bleeding under the lines.
-- Has an in-game settings screen (Mod Menu, or the settings key) in English and Korean.
+- 이젤에 올린 지도 위에 32×32 모눈을 그립니다. 굵은 선과 눈금 숫자(4, 8, 12, … 28)가 위쪽과
+  왼쪽에 붙습니다.
+- 이젤에 앉아 있을 때, 지금 시선 각도로 ArtMap이 칠하게 될 픽셀에 테두리를 그립니다. ArtMap은
+  십자선이 닿는 자리가 아니라 시선 각도로 픽셀을 정하므로 테두리가 십자선과 다를 수 있으며,
+  테두리가 서버와 일치하는 쪽입니다.
+- 화면 구석에 픽셀 좌표를 표시합니다.
+- 클라이언트가 이미 받은 지도 데이터로 도화지를 또렷한 1픽셀 정사각형으로 다시 그려, 찍은
+  픽셀이 선 밑으로 번지지 않고 모눈 칸 안에 정확히 들어가게 합니다.
+- 게임 안 설정 화면이 있습니다(Mod Menu 또는 단축키). 한국어와 영어를 지원합니다.
 
-## What it does not do
+## 하지 않는 일
 
-- No automatic clicking, aiming, or colour selection. It only draws on your screen.
-- No packets are sent to the server and no network connections are made.
-- No automatic updates. New versions are published as new releases only.
+- 자동 클릭, 자동 조준, 자동 색 선택은 없습니다. 화면에 그리기만 합니다.
+- 서버로 보내는 패킷이 없고 네트워크에 접속하지 않습니다.
+- 자동 업데이트가 없습니다. 새 버전은 새 릴리스로만 배포합니다.
 
-## Keys
+## 키
 
-| Key | Default | Action |
+| 키 | 기본값 | 동작 |
 | --- | --- | --- |
-| Toggle canvas grid | `G` | Turn the overlay on or off |
-| Open canvas grid settings | unbound | Open the settings screen (also available from Mod Menu) |
-| Save alignment debug file | unbound | Writes frame and view numbers to `config/yubyeol_canvas_grid/` for bug reports |
+| 캔버스 그리드 켜기/끄기 | `G` | 오버레이 전체를 켜고 끕니다 |
+| 캔버스 그리드 설정 열기 | 없음 | 설정 화면을 엽니다 (Mod Menu에서도 열 수 있음) |
+| 정렬 디버그 파일 저장 | 없음 | 액자·시선 정보를 `config/yubyeol_canvas_grid/`에 저장합니다. 어긋남 문의용 |
 
-All keys can be changed in Options > Controls.
+키는 설정 > 조작에서 바꿀 수 있습니다.
 
-## Settings
+## 설정
 
-Everything below can be changed in the settings screen; hover a control for a short explanation.
-A Korean user guide with the reasoning behind each setting is in `docs/사용설명서.md`.
-The values are stored in `config/yubyeol_canvas_grid.properties`.
+아래 항목은 모두 설정 화면에서 바꿀 수 있고, 항목 위에 마우스를 올리면 짧은 설명이 뜹니다.
+각 항목이 왜 필요한지 정리한 사용 설명서는 [`docs/사용설명서.md`](docs/사용설명서.md)에 있습니다.
+값은 `config/yubyeol_canvas_grid.properties`에 저장됩니다.
 
-| Setting | Default | Meaning |
+| 항목 | 기본값 | 의미 |
 | --- | --- | --- |
-| Overlay | on | Master switch, same as the toggle key |
-| Sharp pixels | on | Repaint the canvas pixels as sharp squares under the grid |
-| Line width | 2 | Thickness of the grid lines, 1 to 5 |
-| Line opacity | 45 % | Opacity of the thin lines; bold lines are drawn stronger |
-| Grid colour | black | One of ten preset colours |
-| Pointer colour | red | Colour of the pixel outline |
-| Pointer width | 3 | Thickness of the pixel outline, 1 to 5 |
-| Bold lines | on | Draw every n-th line bold |
-| Bold every | 4 | 2, 4, 8 or 16 pixels; also sets where tick labels go |
-| Tick labels | on | Numbers along the top and left edges |
-| Pointer outline | on | Outline of the pixel the view will paint, while seated |
-| Pixel coordinates | on | Coordinates text on the HUD |
-| Coordinates position | bottom left | Any of the four screen corners |
-| Easel search range | 6 blocks | How far to look for an easel |
+| 오버레이 표시 | 켜짐 | 전체 스위치. 단축키와 같음 |
+| 픽셀 선명하게 | 켜짐 | 도화지 픽셀을 모눈 아래에 또렷한 정사각형으로 다시 그림 |
+| 선 굵기 | 2 | 모눈 선 두께, 1~5 |
+| 선 불투명도 | 45 % | 얇은 선의 불투명도. 굵은 선은 더 진하게 그려짐 |
+| 그리드 색상 | 검정 | 10가지 색 중 선택 |
+| 포인터 색상 | 빨강 | 픽셀 테두리 색 |
+| 포인터 굵기 | 3 | 픽셀 테두리 두께, 1~5 |
+| 굵은 선 | 켜짐 | n칸마다 선을 굵게 |
+| 굵은 선 간격 | 4 | 2, 4, 8, 16칸. 눈금 숫자 위치도 따라감 |
+| 눈금 숫자 | 켜짐 | 위쪽과 왼쪽의 숫자 |
+| 포인터 테두리 | 켜짐 | 앉았을 때 칠해질 픽셀의 테두리 |
+| 픽셀 좌표 표시 | 켜짐 | HUD의 좌표 글자 |
+| 좌표 표시 위치 | 왼쪽 아래 | 네 모서리 중 하나 |
+| 이젤 탐색 범위 | 6블록 | 이젤을 찾는 거리 |
 
-`surfaceOffset` (blocks, -0.1 to 0.1) exists only in the file, for servers that draw frames at an
-unusual depth.
+`surfaceOffset`(블록, -0.1~0.1)은 파일에만 있는 항목으로, 액자를 다른 깊이에 그리는 서버를 위한
+것입니다.
 
-## Requirements
+## 필요한 것
 
 - Minecraft 1.21.4
-- Fabric Loader 0.16 or newer
+- Fabric Loader 0.16 이상
 - Fabric API
-- Mod Menu (optional, for the settings button in the mod list)
+- Mod Menu (선택. 모드 목록에서 설정 버튼을 쓰려면 필요)
 
-## Building
+## 빌드
 
 ```
 ./gradlew build
 ```
 
-The jar is written to `build/libs/`. The build is the standard Fabric Loom setup, so anyone can
-rebuild it and compare the result with a published release.
+jar는 `build/libs/`에 만들어집니다. 표준 Fabric Loom 구성이라 누구나 다시 빌드해서 배포된
+릴리스와 비교할 수 있습니다.
 
-## Releases
+## 릴리스
 
-Each release lists the SHA-256 of the jar and a VirusTotal scan link.
+릴리스마다 jar의 SHA-256과 VirusTotal 검사 링크를 적습니다.
 
-## License
+## 라이선스
 
-MIT. The cursor angle table in `CursorTable.java` reproduces the lookup table that the ArtMap
-plugin uses, so that the highlighted pixel is the one the server paints.
+MIT. `CursorTable.java`의 커서 각도표는 ArtMap 플러그인이 쓰는 조회표를 그대로 옮긴 것으로,
+테두리로 표시한 픽셀이 서버가 칠하는 픽셀과 일치하도록 하기 위한 것입니다.
