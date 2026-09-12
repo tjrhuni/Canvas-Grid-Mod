@@ -1,6 +1,5 @@
 package kr.yubyeol.canvasgrid;
 
-import java.nio.file.Path;
 import net.fabricmc.api.ClientModInitializer;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import net.fabricmc.fabric.api.client.keybinding.v1.KeyBindingHelper;
@@ -14,7 +13,7 @@ import net.minecraft.text.Text;
 import net.minecraft.util.Identifier;
 import org.lwjgl.glfw.GLFW;
 
-/** Entry point: key bindings, per-tick canvas lookup, and the two render hooks. */
+/** 진입점. 키 바인딩 등록, 틱마다 캔버스 탐색, 월드·HUD 렌더 훅 연결을 담당한다. */
 public final class CanvasGridMod implements ClientModInitializer {
 
   public static final String MOD_ID = "yubyeol_canvas_grid";
@@ -24,13 +23,12 @@ public final class CanvasGridMod implements ClientModInitializer {
 
   private final KeyBinding toggleKey = key("toggle", GLFW.GLFW_KEY_G);
   private final KeyBinding settingsKey = key("settings", GLFW.GLFW_KEY_UNKNOWN);
-  private final KeyBinding debugDumpKey = key("debug_dump", GLFW.GLFW_KEY_UNKNOWN);
 
   private CanvasTracker tracker;
   private GridRenderer gridRenderer;
   private HudOverlay hudOverlay;
 
-  /** The live settings, loaded once at start-up. */
+  /** 시작할 때 한 번 읽어 두는 현재 설정. */
   public static GridConfig config() {
     return config;
   }
@@ -44,7 +42,6 @@ public final class CanvasGridMod implements ClientModInitializer {
 
     KeyBindingHelper.registerKeyBinding(toggleKey);
     KeyBindingHelper.registerKeyBinding(settingsKey);
-    KeyBindingHelper.registerKeyBinding(debugDumpKey);
 
     ClientTickEvents.END_CLIENT_TICK.register(this::onTick);
     WorldRenderEvents.AFTER_TRANSLUCENT.register(gridRenderer::render);
@@ -61,12 +58,6 @@ public final class CanvasGridMod implements ClientModInitializer {
     }
     while (settingsKey.wasPressed()) {
       client.setScreen(new SettingsScreen(client.currentScreen, config));
-    }
-    while (debugDumpKey.wasPressed()) {
-      Path file = DebugDump.write(client, tracker);
-      showStatus(client, file == null
-          ? Text.translatable("message." + MOD_ID + ".debug_none")
-          : Text.translatable("message." + MOD_ID + ".debug_saved", file.getFileName()));
     }
     tracker.update(client);
   }

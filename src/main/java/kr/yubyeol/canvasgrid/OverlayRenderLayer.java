@@ -5,10 +5,9 @@ import net.minecraft.client.render.VertexFormat;
 import net.minecraft.client.render.VertexFormats;
 
 /**
- * Alpha-blended, untextured quads drawn without a depth test, so the overlay always shows on top
- * of the map even though it lies in the same plane. The layer is not flagged translucent: that
- * keeps the quads in submission order (pixels, then grid, then highlight) instead of sorting them
- * by distance, which would let coplanar quads overwrite each other at random.
+ * 깊이 검사 없이 알파 블렌딩으로 그리는 무텍스처 사각형 레이어. 지도와 같은 평면에 있어도 항상
+ * 지도 위에 보이게 한다. 반투명 레이어로 등록하지 않는 이유는 제출 순서(픽셀 → 모눈 → 테두리)를
+ * 유지하기 위해서다. 거리순 정렬이 켜지면 같은 평면의 사각형들이 무작위로 서로를 덮어 버린다.
  */
 final class OverlayRenderLayer extends RenderLayer {
 

@@ -11,7 +11,7 @@ import net.minecraft.client.gui.widget.SliderWidget;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
 
-/** In-game settings, opened from Mod Menu or the settings key. Every change is saved at once. */
+/** 게임 안 설정 화면. Mod Menu 나 설정 키로 연다. 바꾸는 즉시 저장한다. */
 public final class SettingsScreen extends Screen {
 
   private static final int BUTTON_WIDTH = 150;
@@ -136,7 +136,7 @@ public final class SettingsScreen extends Screen {
     return TOP + row * ROW_HEIGHT;
   }
 
-  /** Slider over an integer range that writes straight into the config. */
+  /** 정수 범위 슬라이더. 값이 바뀌면 바로 설정에 기록한다. */
   private abstract class IntSlider extends SliderWidget {
     final String key;
     private final int min;

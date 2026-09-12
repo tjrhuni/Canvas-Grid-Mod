@@ -1,11 +1,12 @@
 package kr.yubyeol.canvasgrid;
 
 /**
- * Angle bounds of ArtMap's 32x32 cursor lookup (resolution 4).
+ * ArtMap 의 32x32 커서 조회표(해상도 4)의 각도 경계값.
  *
- * <p>{@code YAW[i]} is the adjusted yaw at the left edge of column {@code i}; {@code PITCH[x][j]} is the
- * pitch at the top edge of row {@code j} in column {@code x}. Values reproduce the table shipped with the
- * ArtMap plugin (https://github.com/Fupery/ArtMap) so the highlight matches what the server paints.
+ * <p>{@code YAW[i]} 는 {@code i} 번째 열의 왼쪽 경계에 해당하는 보정된 yaw, {@code PITCH[x][j]} 는
+ * {@code x} 열에서 {@code j} 번째 행의 위쪽 경계에 해당하는 pitch 다. 값은 ArtMap 플러그인
+ * (https://github.com/Fupery/ArtMap)에 들어 있는 표를 그대로 옮긴 것으로, 테두리로 표시하는
+ * 픽셀이 서버가 칠하는 픽셀과 같도록 한다.
  */
 final class CursorTable {
 

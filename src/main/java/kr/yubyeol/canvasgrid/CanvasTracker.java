@@ -11,10 +11,10 @@ import net.minecraft.item.map.MapState;
 import net.minecraft.util.math.Direction;
 import net.minecraft.util.math.Vec3d;
 
-/** Finds the easel canvas the player is working on and the pixel their view points at. */
+/** 플레이어가 작업 중인 이젤 도화지와 시선이 가리키는 픽셀을 찾는다. */
 public final class CanvasTracker {
 
-  /** An item frame holding a filled map, with the frame's facing and the map's client-side data. */
+  /** 지도를 든 액자와 그 방향, 그리고 클라이언트가 가진 지도 데이터. */
   public record Canvas(ItemFrameEntity frame, Direction facing, MapState mapState) {}
 
   private final GridConfig config;
@@ -26,12 +26,12 @@ public final class CanvasTracker {
     this.config = config;
   }
 
-  /** The canvas in front of the player, or {@code null} when there is none nearby. */
+  /** 플레이어 앞의 도화지. 근처에 없으면 {@code null}. */
   public Canvas canvas() {
     return canvas;
   }
 
-  /** The pixel the seated player's view would paint, or {@code null} when not aiming at one. */
+  /** 앉은 플레이어의 시선이 칠하게 될 픽셀. 도화지를 겨누고 있지 않으면 {@code null}. */
   public int[] cursor() {
     return cursor;
   }
@@ -65,7 +65,7 @@ public final class CanvasTracker {
       if (distanceSquared > radiusSquared) {
         continue;
       }
-      // Prefer the frame the player is facing; among those, the nearest one.
+      // 플레이어가 바라보는 액자를 우선하고, 그중 가장 가까운 것을 고른다.
       double alignment = offset.normalize().dotProduct(look);
       double score = alignment > 0.7 ? distanceSquared : 1000 + (1 - alignment);
       if (score < bestScore) {

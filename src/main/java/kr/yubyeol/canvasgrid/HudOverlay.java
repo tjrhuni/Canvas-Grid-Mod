@@ -5,7 +5,7 @@ import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.render.RenderTickCounter;
 import net.minecraft.text.Text;
 
-/** Small text in a screen corner with the pixel the view points at. */
+/** 화면 모서리에 시선이 가리키는 픽셀 좌표를 작게 표시한다. */
 public final class HudOverlay {
 
   private static final int MARGIN = 4;

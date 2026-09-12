@@ -2,7 +2,6 @@
   "key.yubyeol_canvas_grid.category": "YUBYEOL's Canvas Grid",
   "key.yubyeol_canvas_grid.toggle": "Toggle canvas grid",
   "key.yubyeol_canvas_grid.settings": "Open canvas grid settings",
-  "key.yubyeol_canvas_grid.debug_dump": "Save alignment debug file",
 
   "screen.yubyeol_canvas_grid.title": "YUBYEOL's Canvas Grid Settings",
 
@@ -58,7 +57,5 @@ Thinner leaves the cell colour visible; thicker stands out from a distance.",
   "hud.yubyeol_canvas_grid.sit": "Sit on the easel to see the pointer",
 
   "message.yubyeol_canvas_grid.enabled": "Canvas grid: on",
-  "message.yubyeol_canvas_grid.disabled": "Canvas grid: off",
-  "message.yubyeol_canvas_grid.debug_saved": "Saved %s",
-  "message.yubyeol_canvas_grid.debug_none": "No canvas nearby to record"
+  "message.yubyeol_canvas_grid.disabled": "Canvas grid: off"
 }

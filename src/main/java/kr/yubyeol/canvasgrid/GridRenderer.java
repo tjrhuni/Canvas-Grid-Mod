@@ -15,7 +15,7 @@ import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.Vec3d;
 import org.joml.Matrix4f;
 
-/** Draws the grid, the tick labels and the cursor highlight on the face of the easel's frame. */
+/** 이젤 액자 면 위에 모눈, 눈금 숫자, 커서 테두리를 그린다. */
 public final class GridRenderer {
 
   private static final int SIZE = ArtMapCursor.SIZE;
@@ -23,14 +23,14 @@ public final class GridRenderer {
   private static final int MAP_SIZE = 128;
   private static final int MAP_PIXELS_PER_CANVAS_PIXEL = MAP_SIZE / SIZE;
   /**
-   * Where vanilla draws a map relative to the frame entity's position, along the frame's facing.
-   * The renderer moves 0.46875 out of the wall, then back 0.5 (invisible frame) or 0.4375 (visible
-   * frame), then 1/128 forward for the map itself. ArtMap easels use invisible frames.
+   * 바닐라가 액자 엔티티 위치를 기준으로 지도를 그리는 깊이(액자가 바라보는 방향 기준). 렌더러는
+   * 벽에서 0.46875 나온 뒤 보이지 않는 액자는 0.5, 보이는 액자는 0.4375 만큼 되돌아가고, 지도는
+   * 거기서 1/128 앞에 그린다.
    */
   private static final float INVISIBLE_FRAME_MAP_OFFSET = 0.46875f - 0.5f + 1f / 128f;
   private static final float VISIBLE_FRAME_MAP_OFFSET = 0.46875f - 0.4375f + 1f / 128f;
   private static final float SURFACE_CLEARANCE = 0.001f;
-  /** Half the width of a thin line per step of the line width setting. */
+  /** 선 굵기 설정 한 단계당 얇은 선 반폭. */
   private static final float HALF_WIDTH_PER_STEP = 0.00125f;
   private static final int BOLD_EXTRA_ALPHA = 90;
   private static final float HIGHLIGHT_HALF_WIDTH_PER_STEP = 0.002f;
@@ -80,8 +80,8 @@ public final class GridRenderer {
   }
 
   /**
-   * Repaints the 32x32 canvas from the client's map data as flat quads, one per pixel, so each
-   * pixel is a sharp square that lines up with the grid instead of the filtered map texture.
+   * 클라이언트의 지도 데이터로 32x32 캔버스를 픽셀마다 사각형 하나씩 다시 그린다. 필터링된 지도
+   * 텍스처 대신 또렷한 정사각형이 모눈과 정확히 맞물린다.
    */
   private static void drawCanvasPixels(VertexConsumer quads, Matrix4f matrix, Plane plane,
       MapState mapState) {
@@ -112,7 +112,7 @@ public final class GridRenderer {
       int alpha = bold ? boldAlpha : thinAlpha;
       float halfWidth = bold ? thinHalfWidth * 2 : thinHalfWidth;
       float offset = -0.5f + i * CELL;
-      // Lines are centred on the pixel boundary, except the two outer edges, which stay inside.
+      // 선은 픽셀 경계에 중심을 맞추되, 바깥 테두리 두 줄은 캔버스 안쪽으로만 그린다.
       float near = i == 0 ? offset : offset - halfWidth;
       float far = i == SIZE ? offset : offset + halfWidth;
       fillQuad(quads, matrix, plane, near, -0.5f, far, 0.5f, 0f, color, alpha);
@@ -136,8 +136,8 @@ public final class GridRenderer {
   }
 
   /**
-   * Fills the rectangle spanning {@code (x0, y0)} to {@code (x1, y1)} in plane coordinates, where
-   * x runs to the viewer's right and y runs up, both from -0.5 to 0.5 across the frame.
+   * 평면 좌표 {@code (x0, y0)}~{@code (x1, y1)} 사각형을 채운다. x 는 보는 사람의 오른쪽, y 는
+   * 위쪽이며 액자 한 변이 -0.5~0.5 다.
    */
   private static void fillQuad(VertexConsumer quads, Matrix4f matrix, Plane plane, float x0,
       float y0, float x1, float y1, float lift, int rgb, int alpha) {
@@ -158,7 +158,7 @@ public final class GridRenderer {
     float textYaw = viewYawTowards(plane.facing);
     for (int i = config.boldEvery; i < SIZE; i += config.boldEvery) {
       String label = Integer.toString(i);
-      // Pixels are numbered from the top-left, so columns grow rightwards and rows downwards.
+      // 픽셀 번호는 왼쪽 위가 1 이므로 열은 오른쪽으로, 행은 아래로 커진다.
       float column = -0.5f + i * CELL;
       float row = 0.5f - i * CELL;
       drawLabel(matrices, consumers, textRenderer, textYaw, label,
@@ -168,7 +168,7 @@ public final class GridRenderer {
     }
   }
 
-  /** Yaw of a player who stands in front of the frame and looks at it. */
+  /** 액자 앞에 서서 액자를 바라보는 플레이어의 yaw. */
   private static float viewYawTowards(Direction facing) {
     return switch (facing) {
       case NORTH -> 0f;
@@ -192,7 +192,7 @@ public final class GridRenderer {
     matrices.pop();
   }
 
-  /** The plane of the map inside the frame: an origin plus right, up and outward unit vectors. */
+  /** 액자 속 지도의 평면. 원점과 오른쪽·위·바깥 단위 벡터로 이루어진다. */
   private record Plane(Vec3d origin, Vec3d right, Vec3d up, Vec3d out, Direction facing) {
 
     static Plane of(ItemFrameEntity frame, Direction facing, float extraOffset) {

@@ -2,7 +2,6 @@
   "key.yubyeol_canvas_grid.category": "YUBYEOL's Canvas Grid",
   "key.yubyeol_canvas_grid.toggle": "캔버스 그리드 켜기/끄기",
   "key.yubyeol_canvas_grid.settings": "캔버스 그리드 설정 열기",
-  "key.yubyeol_canvas_grid.debug_dump": "정렬 디버그 파일 저장",
 
   "screen.yubyeol_canvas_grid.title": "YUBYEOL's Canvas Grid 설정",
 
@@ -58,7 +57,5 @@
   "hud.yubyeol_canvas_grid.sit": "이젤에 앉으면 포인터가 표시됩니다",
 
   "message.yubyeol_canvas_grid.enabled": "캔버스 그리드: 켜짐",
-  "message.yubyeol_canvas_grid.disabled": "캔버스 그리드: 꺼짐",
-  "message.yubyeol_canvas_grid.debug_saved": "%s 저장됨",
-  "message.yubyeol_canvas_grid.debug_none": "기록할 캔버스가 근처에 없습니다"
+  "message.yubyeol_canvas_grid.disabled": "캔버스 그리드: 꺼짐"
 }

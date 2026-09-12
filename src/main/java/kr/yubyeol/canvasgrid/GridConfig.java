@@ -10,10 +10,10 @@ import java.util.Properties;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.text.Text;
 
-/** User settings, stored as a plain properties file in the config directory. */
+/** 사용자 설정. config 폴더의 properties 파일에 저장한다. */
 public final class GridConfig {
 
-  /** Named colours offered in the settings screen. */
+  /** 설정 화면에서 고를 수 있는 색 목록. */
   public enum Palette {
     BLACK(0x000000),
     WHITE(0xFFFFFF),
@@ -37,7 +37,7 @@ public final class GridConfig {
     }
   }
 
-  /** Screen corner for the pixel coordinate text. */
+  /** 픽셀 좌표 글자를 둘 화면 모서리. */
   public enum HudCorner {
     BOTTOM_LEFT,
     BOTTOM_RIGHT,
@@ -61,20 +61,20 @@ public final class GridConfig {
   public boolean showCursor = true;
   public boolean showHud = true;
   public HudCorner hudCorner = HudCorner.BOTTOM_LEFT;
-  /** Line thickness step, 1 (hairline) to 5 (thick). */
+  /** 모눈 선 굵기 단계. 1(가장 얇음)~5(가장 굵음). */
   public int lineWidth = 2;
-  /** Opacity of the thin lines, 0-100 percent. */
+  /** 얇은 선의 불투명도(0~100%). */
   public int lineOpacity = 45;
   public Palette gridColor = Palette.BLACK;
   public boolean boldLines = true;
-  /** Every n-th grid line is drawn bold and labelled. */
+  /** 몇 칸마다 굵은 선과 눈금 숫자를 둘지. */
   public int boldEvery = 4;
   public Palette highlightColor = Palette.RED;
-  /** Pointer outline thickness step, 1 (hairline) to 5 (thick). */
+  /** 포인터 테두리 굵기 단계. 1(가장 얇음)~5(가장 굵음). */
   public int pointerWidth = 3;
-  /** How far (blocks) from the player to look for an easel canvas. */
+  /** 플레이어 주변 몇 블록 안에서 이젤 도화지를 찾을지. */
   public double searchRadius = 6.0;
-  /** Extra distance (blocks) to move the overlay out of the map plane, for odd frame setups. */
+  /** 액자를 특이한 깊이에 그리는 서버용. 오버레이를 지도 평면에서 추가로 띄우는 거리(블록). */
   public double surfaceOffset = 0.0;
 
   public static GridConfig load() {
@@ -133,11 +133,11 @@ public final class GridConfig {
         p.store(writer, "YUBYEOL's Canvas Grid Mod");
       }
     } catch (IOException ignored) {
-      // A missing config file only means the defaults are used next time.
+      // 저장에 실패해도 다음 시작 때 기본값을 쓰면 되므로 무시한다.
     }
   }
 
-  /** Restores every setting except the advanced surface offset. */
+  /** 고급 항목인 surfaceOffset 을 제외한 모든 설정을 기본값으로 되돌린다. */
   public void resetToDefaults() {
     GridConfig defaults = new GridConfig();
     enabled = defaults.enabled;
@@ -156,7 +156,7 @@ public final class GridConfig {
     searchRadius = defaults.searchRadius;
   }
 
-  /** The next bold interval in the fixed list, wrapping around. */
+  /** 굵은 선 간격 목록에서 다음 값. 끝에 이르면 처음으로 돌아간다. */
   public int nextBoldInterval() {
     for (int i = 0; i < BOLD_INTERVALS.length; i++) {
       if (BOLD_INTERVALS[i] == boldEvery) {
