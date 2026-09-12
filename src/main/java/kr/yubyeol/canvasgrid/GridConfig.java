@@ -60,18 +60,18 @@ public final class GridConfig {
   public boolean showLabels = true;
   public boolean showCursor = true;
   public boolean showHud = true;
-  public HudCorner hudCorner = HudCorner.BOTTOM_LEFT;
+  public HudCorner hudCorner = HudCorner.BOTTOM_RIGHT;
   /** 모눈 선 굵기 단계. 1(가장 얇음)~5(가장 굵음). */
-  public int lineWidth = 2;
+  public int lineWidth = 1;
   /** 얇은 선의 불투명도(0~100%). */
   public int lineOpacity = 45;
-  public Palette gridColor = Palette.BLACK;
+  public Palette gridColor = Palette.GRAY;
   public boolean boldLines = true;
   /** 몇 칸마다 굵은 선과 눈금 숫자를 둘지. */
   public int boldEvery = 4;
   public Palette highlightColor = Palette.RED;
   /** 포인터 테두리 굵기 단계. 1(가장 얇음)~5(가장 굵음). */
-  public int pointerWidth = 3;
+  public int pointerWidth = 1;
   /** 플레이어 주변 몇 블록 안에서 이젤 도화지를 찾을지. */
   public double searchRadius = 6.0;
   /** 액자를 특이한 깊이에 그리는 서버용. 오버레이를 지도 평면에서 추가로 띄우는 거리(블록). */
